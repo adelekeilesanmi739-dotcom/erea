@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EarnVia Dashboard</title>
+
+    <meta
+        name="description"
+        content="Your personal earning dashboard"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="dashboard.css"
+    >
+</head>
+
+<body>
+
+<!-- ================================
+     APP
+================================ -->
+
+<div class="app">
+
+
+    <!-- ================================
+         MOBILE TOP BAR
+    ================================= -->
+
+    <header class="mobile-topbar">
+
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            type="button"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+
+        <div class="mobile-brand">
+
+            <div class="brand-mark">
+                E
+            </div>
+
+            <span>
+                EarnVia
+            </span>
+
+        </div>
+
+
+        <button
+            class="mobile-notification"
+            type="button"
+            onclick="showToast('No new notifications', 'info')"
+        >
+            <i class="fa-regular fa-bell"></i>
+
+            <span class="notification-dot"></span>
+        </button>
+
+    </header>
+
+
+
+    <!-- ================================
+         SIDEBAR
+    ================================= -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                E
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    EarnVia
+                </div>
+
+                <div class="brand-subtitle">
+                    Earning Dashboard
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-user">
+
+            <div
+                class="user-avatar"
+                id="sidebarAvatar"
+            >
+                O
+            </div>
+
+            <div class="sidebar-user-info">
+
+                <strong id="sidebarName">
+                    User
+                </strong>
+
+                <span id="sidebarEmail">
+                    Loading...
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-label">
+                MAIN MENU
+            </p>
+
+
+            <button
+                class="nav-item active"
+                type="button"
+                data-section="home"
+                onclick="showSection('home')"
+            >
+
+                <i class="fa-solid fa-grid-2"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-section="tasks"
+                onclick="showSection('tasks')"
+            >
+
+                <i class="fa-solid fa-list-check"></i>
+
+                <span>
+                    Tasks
+                </span>
+
+                <span class="nav-badge">
+                    1
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-section="vip"
+                onclick="showSection('vip')"
+            >
+
+                <i class="fa-solid fa-crown"></i>
+
+                <span>
+                    VIP Membership
+                </span>
+
+            </button>
+
+
+            <p class="nav-label nav-label-spaced">
+                WALLET
+            </p>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                onclick="openRecharge()"
+            >
+
+                <i class="fa-solid fa-wallet"></i>
+
+                <span>
+                    Recharge
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                onclick="openWithdraw()"
+            >
+
+                <i class="fa-solid fa-money-bill-transfer"></i>
+
+                <span>
+                    Withdraw
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                data-section="transactions"
+                onclick="showSection('transactions')"
+            >
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>
+                    Transactions
+                </span>
+
+            </button>
+
+
+            <p class="nav-label nav-label-spaced">
+                MORE
+            </p>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                onclick="openSpinWin()"
+            >
+
+                <i class="fa-solid fa-dharmachakra"></i>
+
+                <span>
+                    Spin & Win
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                onclick="openInvite()"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                <span>
+                    Invite Friends
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item"
+                type="button"
+                onclick="openWealth()"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Wealth Funds
+                </span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="nav-item"
+                type="button"
+                onclick="openProfile()"
+            >
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>
+                    Profile
+                </span>
+
+            </button>
+
+
+            <button
+                class="nav-item logout-item"
+                type="button"
+                onclick="logout()"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================================
+         MAIN
+    ================================= -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="main-header">
+
+            <div>
+
+                <p class="header-greeting">
+                    Welcome back 👋
+                </p>
+
+                <h1 id="welcomeName">
+                    Hello, User
+                </h1>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="icon-button"
+                    type="button"
+                    onclick="showToast('No new notifications', 'info')"
+                >
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+                </button>
+
+
+                <div class="header-user">
+
+                    <div
+                        class="header-avatar"
+                        id="headerAvatar"
+                    >
+                        O
+                    </div>
+
+                    <div>
+
+                        <strong id="headerUserName">
+                            User
+                        </strong>
+
+                        <span>
+                            Account
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================
+             HOME SECTION
+        ================================== -->
+
+        <section
+            class="dashboard-section active-section"
+            id="section-home"
+        >
+
+
+            <!-- WALLET HERO -->
+
+            <div class="wallet-hero">
+
+                <div class="wallet-background-circle circle-one"></div>
+                <div class="wallet-background-circle circle-two"></div>
+
+
+                <div class="wallet-hero-content">
+
+                    <div>
+
+                        <div class="wallet-label">
+                            Available Balance
+                        </div>
+
+                        <div
+                            class="wallet-balance"
+                            id="balance"
+                        >
+                            ₦0.00
+                        </div>
+
+                        <div class="wallet-account">
+                            Wallet account
+                        </div>
+
+                    </div>
+
+
+                    <div class="wallet-actions">
+
+                        <button
+                            type="button"
+                            onclick="openRecharge()"
+                        >
+                            <i class="fa-solid fa-plus"></i>
+                            Recharge
+                        </button>
+
+                        <button
+                            type="button"
+                            class="wallet-withdraw-btn"
+                            onclick="openWithdraw()"
+                        >
+                            <i class="fa-solid fa-arrow-up"></i>
+                            Withdraw
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="wallet-stats">
+
+                    <div class="wallet-stat">
+
+                        <span>
+                            Total Earnings
+                        </span>
+
+                        <strong id="totalEarnings">
+                            ₦0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="wallet-stat">
+
+                        <span>
+                            Withdrawn
+                        </span>
+
+                        <strong id="withdrawnAmount">
+                            ₦0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="wallet-stat">
+
+                        <span>
+                            VIP Level
+                        </span>
+
+                        <strong id="vipLevel">
+                            VIP 0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Manage your account and earnings
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="action-grid">
+
+
+                <button
+                    class="action-card"
+                    type="button"
+                    onclick="openRecharge()"
+                >
+
+                    <div class="action-icon blue">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <div class="action-text">
+
+                        <strong>
+                            Recharge
+                        </strong>
+
+                        <span>
+                            Add money to wallet
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                </button>
+
+
+
+                <button
+                    class="action-card"
+                    type="button"
+                    onclick="openWithdraw()"
+                >
+
+                    <div class="action-icon green">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+
+                    <div class="action-text">
+
+                        <strong>
+                            Withdraw
+                        </strong>
+
+                        <span>
+                            Transfer your earnings
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                </button>
+
+
+
+                <button
+                    class="action-card"
+                    type="button"
+                    onclick="showSection('vip')"
+                >
+
+                    <div class="action-icon gold">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+
+                    <div class="action-text">
+
+                        <strong>
+                            VIP Membership
+                        </strong>
+
+                        <span>
+                            Upgrade your account
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                </button>
+
+
+
+                <button
+                    class="action-card"
+                    type="button"
+                    onclick="openSpinWin()"
+                >
+
+                    <div class="action-icon purple">
+                        <i class="fa-solid fa-dharmachakra"></i>
+                    </div>
+
+                    <div class="action-text">
+
+                        <strong>
+                            Spin & Win
+                        </strong>
+
+                        <span>
+                            Play the wheel
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                </button>
+
+
+
+                <button
+                    class="action-card"
+                    type="button"
+                    onclick="openInvite()"
+                >
+
+                    <div class="action-icon orange">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+
+                    <div class="action-text">
+
+                        <strong>
+                            Invite Friends
+                        </strong>
+
+                        <span>
+                            Earn referral rewards
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                </button>
+
+
+
+                <button
+                    class="action-card"
+                    type="button"
+                    onclick="openWealth()"
+                >
+
+                    <div class="action-icon teal">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <div class="action-text">
+
+                        <strong>
+                            Wealth Funds
+                        </strong>
+
+                        <span>
+                            Grow your money
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right action-arrow"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- TASKS -->
+
+            <div class="content-grid">
+
+
+                <div class="dashboard-card tasks-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Today's Tasks
+                            </h3>
+
+                            <p>
+                                Complete tasks and earn rewards
+                            </p>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="text-button"
+                            onclick="showSection('tasks')"
+                        >
+                            View all
+                        </button>
+
+                    </div>
+
+
+                    <div class="task-item">
+
+                        <div class="task-icon">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+
+                        <div class="task-info">
+
+                            <strong>
+                                Internship Task
+                            </strong>
+
+                            <span>
+                                Complete your assigned task
+                            </span>
+
+                            <div class="progress-track">
+
+                                <div
+                                    class="progress-bar"
+                                    style="width:100%"
+                                ></div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="task-reward">
+                            +₦300
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-status">
+                        <i class="fa-solid fa-circle-check"></i>
+                        1 of 1 task completed
+                    </div>
+
+                </div>
+
+
+
+                <!-- VIP PREVIEW -->
+
+                <div class="dashboard-card vip-preview">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                VIP Membership
+                            </h3>
+
+                            <p>
+                                Unlock more earning opportunities
+                            </p>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="text-button"
+                            onclick="showSection('vip')"
+                        >
+                            Explore
+                        </button>
+
+                    </div>
+
+
+                    <div class="vip-preview-list">
+
+                        <div class="mini-vip active">
+
+                            <div class="mini-vip-icon">
+                                1
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    VIP 1
+                                </strong>
+
+                                <span>
+                                    ₦1,000
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="mini-vip">
+
+                            <div class="mini-vip-icon">
+                                2
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    VIP 2
+                                </strong>
+
+                                <span>
+                                    ₦5,000
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="mini-vip">
+
+                            <div class="mini-vip-icon">
+                                3
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    VIP 3
+                                </strong>
+
+                                <span>
+                                    ₦10,000
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             TASKS
+        ================================== -->
+
+        <section
+            class="dashboard-section"
+            id="section-tasks"
+        >
+
+            <div class="page-title">
+
+                <span>
+                    <i class="fa-solid fa-list-check"></i>
+                </span>
+
+                <div>
+
+                    <h2>
+                        Tasks
+                    </h2>
+
+                    <p>
+                        Complete available tasks and earn rewards.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="task-list-large">
+
+                <div class="large-task-card">
+
+                    <div class="large-task-icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+
+                    <div class="large-task-content">
+
+                        <div class="task-tag">
+                            ACTIVE
+                        </div>
+
+                        <h3>
+                            Internship Task
+                        </h3>
+
+                        <p>
+                            Complete your assigned internship task.
+                        </p>
+
+                        <div class="task-meta">
+
+                            <span>
+                                <i class="fa-regular fa-clock"></i>
+                                Today
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-coins"></i>
+                                ₦300 reward
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="primary-button"
+                        type="button"
+                        onclick="showToast('This task has already been completed.', 'info')"
+                    >
+                        Completed
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             VIP
+        ================================== -->
+
+        <section
+            class="dashboard-section"
+            id="section-vip"
+        >
+
+            <div class="page-title">
+
+                <span>
+                    <i class="fa-solid fa-crown"></i>
+                </span>
+
+                <div>
+
+                    <h2>
+                        VIP Membership
+                    </h2>
+
+                    <p>
+                        Upgrade your membership and access additional features.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="vip-grid">
+
+
+                <div class="vip-card">
+
+                    <div class="vip-card-top">
+
+                        <span class="vip-number">
+                            VIP 1
+                        </span>
+
+                        <span class="vip-popular">
+                            STARTER
+                        </span>
+
+                    </div>
+
+                    <div class="vip-price">
+                        ₦1,000
+                    </div>
+
+                    <p>
+                        Starter membership
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Access to VIP features
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Member dashboard
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Priority support
+                        </li>
+
+                    </ul>
+
+                    <button
+                        class="primary-button full-button"
+                        type="button"
+                        onclick="buyVIP(1)"
+                    >
+                        Upgrade to VIP 1
+                    </button>
+
+                </div>
+
+
+
+                <div class="vip-card featured">
+
+                    <div class="vip-card-top">
+
+                        <span class="vip-number">
+                            VIP 2
+                        </span>
+
+                        <span class="vip-popular">
+                            POPULAR
+                        </span>
+
+                    </div>
+
+                    <div class="vip-price">
+                        ₦5,000
+                    </div>
+
+                    <p>
+                        Advanced membership
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            VIP earning features
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Priority tasks
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Priority support
+                        </li>
+
+                    </ul>
+
+                    <button
+                        class="primary-button full-button"
+                        type="button"
+                        onclick="buyVIP(2)"
+                    >
+                        Upgrade to VIP 2
+                    </button>
+
+                </div>
+
+
+
+                <div class="vip-card">
+
+                    <div class="vip-card-top">
+
+                        <span class="vip-number">
+                            VIP 3
+                        </span>
+
+                    </div>
+
+                    <div class="vip-price">
+                        ₦10,000
+                    </div>
+
+                    <p>
+                        Premium membership
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Premium features
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Higher access
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Priority support
+                        </li>
+
+                    </ul>
+
+                    <button
+                        class="primary-button full-button"
+                        type="button"
+                        onclick="buyVIP(3)"
+                    >
+                        Upgrade to VIP 3
+                    </button>
+
+                </div>
+
+
+
+                <div class="vip-card">
+
+                    <div class="vip-card-top">
+
+                        <span class="vip-number">
+                            VIP 4
+                        </span>
+
+                    </div>
+
+                    <div class="vip-price">
+                        ₦20,000
+                    </div>
+
+                    <p>
+                        Elite membership
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Elite features
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Enhanced access
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Priority support
+                        </li>
+
+                    </ul>
+
+                    <button
+                        class="primary-button full-button"
+                        type="button"
+                        onclick="buyVIP(4)"
+                    >
+                        Upgrade to VIP 4
+                    </button>
+
+                </div>
+
+
+
+                <div class="vip-card">
+
+                    <div class="vip-card-top">
+
+                        <span class="vip-number">
+                            VIP 5
+                        </span>
+
+                    </div>
+
+                    <div class="vip-price">
+                        ₦50,000
+                    </div>
+
+                    <p>
+                        Professional membership
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Professional features
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Premium access
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Priority support
+                        </li>
+
+                    </ul>
+
+                    <button
+                        class="primary-button full-button"
+                        type="button"
+                        onclick="buyVIP(5)"
+                    >
+                        Upgrade to VIP 5
+                    </button>
+
+                </div>
+
+
+
+                <div class="vip-card">
+
+                    <div class="vip-card-top">
+
+                        <span class="vip-number">
+                            VIP 6
+                        </span>
+
+                    </div>
+
+                    <div class="vip-price">
+                        ₦100,000
+                    </div>
+
+                    <p>
+                        Ultimate membership
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Ultimate features
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Maximum access
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Priority support
+                        </li>
+
+                    </ul>
+
+                    <button
+                        class="primary-button full-button"
+                        type="button"
+                        onclick="buyVIP(6)"
+                    >
+                        Upgrade to VIP 6
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             TRANSACTIONS
+        ================================== -->
+
+        <section
+            class="dashboard-section"
+            id="section-transactions"
+        >
+
+            <div class="page-title">
+
+                <span>
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </span>
+
+                <div>
+
+                    <h2>
+                        Transactions
+                    </h2>
+
+                    <p>
+                        View your wallet activity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="transaction-card">
+
+                <div class="transaction-tabs">
+
+                    <button
+                        class="transaction-tab active"
+                        type="button"
+                        onclick="loadTransactions('all', this)"
+                    >
+                        All
+                    </button>
+
+                    <button
+                        class="transaction-tab"
+                        type="button"
+                        onclick="loadTransactions('deposit', this)"
+                    >
+                        Deposits
+                    </button>
+
+                    <button
+                        class="transaction-tab"
+                        type="button"
+                        onclick="loadTransactions('withdrawal', this)"
+                    >
+                        Withdrawals
+                    </button>
+
+                </div>
+
+
+                <div id="transactionList">
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-receipt"></i>
+
+                        <h3>
+                            No transactions yet
+                        </h3>
+
+                        <p>
+                            Your wallet activity will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================
+     MOBILE NAV
+========================================= -->
+
+<nav class="mobile-bottom-nav">
+
+    <button
+        type="button"
+        class="mobile-nav-item active"
+        onclick="showSection('home')"
+    >
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>
+            Home
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="mobile-nav-item"
+        onclick="showSection('tasks')"
+    >
+
+        <i class="fa-solid fa-list-check"></i>
+
+        <span>
+            Tasks
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="mobile-nav-item spin-mobile-button"
+        onclick="openSpinWin()"
+    >
+
+        <span class="mobile-spin-circle">
+            <i class="fa-solid fa-dharmachakra"></i>
+        </span>
+
+        <span>
+            Spin
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="mobile-nav-item"
+        onclick="showSection('vip')"
+    >
+
+        <i class="fa-solid fa-crown"></i>
+
+        <span>
+            VIP
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="mobile-nav-item"
+        onclick="openProfile()"
+    >
+
+        <i class="fa-regular fa-user"></i>
+
+        <span>
+            Profile
+        </span>
+
+    </button>
+
+</nav>
+
+
+
+<!-- =========================================
+     SPIN & WIN MODAL
+========================================= -->
+
+<div
+    class="modal-overlay"
+    id="spinPanel"
+>
+
+    <div class="spin-modal">
+
+
+        <button
+            class="modal-close"
+            type="button"
+            onclick="closeSpinWin()"
+        >
+            ×
+        </button>
+
+
+        <div class="spin-modal-header">
+
+            <div class="spin-crown">
+                <i class="fa-solid fa-dharmachakra"></i>
+            </div>
+
+            <h2>
+                Spin & Win
+            </h2>
+
+            <p>
+                Choose your stake and spin the wheel
+            </p>
+
+        </div>
+
+
+        <div class="stake-box">
+
+            <label for="spinStake">
+                Select your stake
+            </label>
+
+            <select id="spinStake">
+
+                <option value="100">
+                    ₦100
+                </option>
+
+                <option value="200">
+                    ₦200
+                </option>
+
+                <option value="500">
+                    ₦500
+                </option>
+
+                <option value="1000">
+                    ₦1,000
+                </option>
+
+                <option value="2000">
+                    ₦2,000
+                </option>
+
+                <option value="5000">
+                    ₦5,000
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- WHEEL -->
+
+        <div class="wheel-wrapper">
+
+            <div class="wheel-pointer">
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+
+
+            <div
+                class="game-wheel"
+                id="spinWheel"
+            >
+
+                <div class="wheel-label label-one">
+                    0x
+                </div>
+
+                <div class="wheel-label label-two">
+                    1.2x
+                </div>
+
+                <div class="wheel-label label-three">
+                    2x
+                </div>
+
+                <div class="wheel-label label-four">
+                    0x
+                </div>
+
+                <div class="wheel-label label-five">
+                    1.2x
+                </div>
+
+                <div class="wheel-label label-six">
+                    2.0x
+                </div>
+
+
+                <div class="wheel-center">
+
+                    <span>
+                        SPIN
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="spin-now-button"
+            id="spinButton"
+            type="button"
+            onclick="spinWheel()"
+        >
+
+            <i class="fa-solid fa-play"></i>
+
+            SPIN NOW
+
+        </button>
+
+
+        <div
+            class="spin-result"
+            id="spinResult"
+        ></div>
+
+
+        <p class="game-disclaimer">
+            Play responsibly. Results are generated by the server.
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     RECHARGE MODAL
+========================================= -->
+
+<div
+    class="modal-overlay"
+    id="rechargeModal"
+>
+
+    <div class="standard-modal">
+
+        <button
+            class="modal-close"
+            type="button"
+            onclick="closeModal('rechargeModal')"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-icon blue">
+            <i class="fa-solid fa-wallet"></i>
+        </div>
+
+
+        <h2>
+            Recharge Wallet
+        </h2>
+
+        <p class="modal-description">
+            Add funds securely to your wallet.
+        </p>
+
+
+        <label>
+            Amount
+        </label>
+
+        <div class="input-with-prefix">
+
+            <span>
+                ₦
+            </span>
+
+            <input
+                type="number"
+                id="rechargeAmount"
+                min="100"
+                placeholder="Enter amount"
+            >
+
+        </div>
+
+
+        <button
+            class="primary-button full-button"
+            type="button"
+            id="rechargeButton"
+            onclick="startRecharge()"
+        >
+            Continue to Payment
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     WITHDRAW MODAL
+========================================= -->
+
+<div
+    class="modal-overlay"
+    id="withdrawModal"
+>
+
+    <div class="standard-modal">
+
+        <button
+            class="modal-close"
+            type="button"
+            onclick="closeModal('withdrawModal')"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-icon green">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+        </div>
+
+
+        <h2>
+            Withdraw Funds
+        </h2>
+
+        <p class="modal-description">
+            Withdraw your available wallet balance.
+        </p>
+
+
+        <label>
+            Amount
+        </label>
+
+        <div class="input-with-prefix">
+
+            <span>
+                ₦
+            </span>
+
+            <input
+                type="number"
+                id="withdrawAmount"
+                min="100"
+                placeholder="Amount"
+            >
+
+        </div>
+
+
+        <label>
+            Bank Code
+        </label>
+
+        <input
+            class="form-input"
+            id="bankCode"
+            type="text"
+            placeholder="e.g. 058"
+        >
+
+
+        <label>
+            Account Number
+        </label>
+
+        <input
+            class="form-input"
+            id="accountNumber"
+            type="text"
+            inputmode="numeric"
+            maxlength="10"
+            placeholder="10-digit account number"
+        >
+
+
+        <button
+            class="primary-button full-button"
+            type="button"
+            id="withdrawButton"
+            onclick="submitWithdrawal()"
+        >
+            Withdraw Funds
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     INVITE MODAL
+========================================= -->
+
+<div
+    class="modal-overlay"
+    id="inviteModal"
+>
+
+    <div class="standard-modal center-modal">
+
+        <button
+            class="modal-close"
+            type="button"
+            onclick="closeModal('inviteModal')"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-icon orange">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+
+        <h2>
+            Invite Friends
+        </h2>
+
+        <p class="modal-description">
+            Invite friends and grow your network.
+        </p>
+
+
+        <div class="referral-box">
+
+            <span>
+                Your referral link
+            </span>
+
+            <strong id="referralLink">
+                Loading...
+            </strong>
+
+        </div>
+
+
+        <button
+            class="primary-button full-button"
+            type="button"
+            onclick="copyReferralLink()"
+        >
+            <i class="fa-solid fa-copy"></i>
+            Copy Referral Link
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     WEALTH MODAL
+========================================= -->
+
+<div
+    class="modal-overlay"
+    id="wealthModal"
+>
+
+    <div class="standard-modal">
+
+        <button
+            class="modal-close"
+            type="button"
+            onclick="closeModal('wealthModal')"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-icon teal">
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
+
+
+        <h2>
+            Wealth Funds
+        </h2>
+
+        <p class="modal-description">
+            Manage your wealth and future financial goals.
+        </p>
+
+
+        <div class="wealth-info-card">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <div>
+
+                <strong>
+                    Wealth features
+                </strong>
+
+                <span>
+                    Investment options can be added here as your platform grows.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-button full-button"
+            type="button"
+            onclick="showToast('Wealth Funds are coming soon.', 'info'); closeModal('wealthModal')"
+        >
+            Explore Funds
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     PROFILE MODAL
+========================================= -->
+
+<div
+    class="modal-overlay"
+    id="profileModal"
+>
+
+    <div class="standard-modal">
+
+        <button
+            class="modal-close"
+            type="button"
+            onclick="closeModal('profileModal')"
+        >
+            ×
+        </button>
+
+
+        <div class="profile-large-avatar">
+            <span id="profileAvatar">
+                O
+            </span>
+        </div>
+
+
+        <h2 id="profileName">
+            User
+        </h2>
+
+        <p
+            class="modal-description"
+            id="profileEmail"
+        >
+            Loading...
+        </p>
+
+
+        <div class="profile-info-row">
+
+            <span>
+                VIP Level
+            </span>
+
+            <strong id="profileVip">
+                VIP 0
+            </strong>
+
+        </div>
+
+
+        <div class="profile-info-row">
+
+            <span>
+                Balance
+            </span>
+
+            <strong id="profileBalance">
+                ₦0.00
+            </strong>
+
+        </div>
+
+
+        <button
+            class="danger-button full-button"
+            type="button"
+            onclick="logout()"
+        >
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div
+    class="toast-container"
+    id="toastContainer"
+></div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="dashboard.js"></script>
+
+</body>
+</html>

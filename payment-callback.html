@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Payment Processing</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            background: #f3f6fa;
+
+            color: #00133d;
+
+        }
+
+
+        .payment-card {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            background: white;
+
+            padding: 35px 25px;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0,0,0,0.08);
+
+        }
+
+
+        .icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            margin:
+                0 auto 20px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: #fff4cc;
+
+            font-size: 32px;
+
+        }
+
+
+        h1 {
+
+            margin:
+                0 0 12px;
+
+            font-size: 25px;
+
+        }
+
+
+        p {
+
+            color: #667085;
+
+            line-height: 1.6;
+
+        }
+
+
+        .success {
+
+            color: #16834b;
+
+        }
+
+
+        .error {
+
+            color: #d92d20;
+
+        }
+
+
+        .button {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding:
+                13px 22px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #00133d;
+
+            color: white;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="payment-card">
+
+        <div
+            class="icon"
+            id="statusIcon"
+        >
+            ⏳
+        </div>
+
+
+        <h1 id="title">
+            Verifying Payment
+        </h1>
+
+
+        <p id="message">
+            Please wait while we confirm
+            your payment and update your wallet.
+        </p>
+
+
+        <a
+            href="dashboard.html"
+            class="button"
+            id="dashboardButton"
+            style="display:none;"
+        >
+            Back to Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        // ==================================================
+        // SUPABASE CONFIG
+        // ==================================================
+
+        const SUPABASE_URL =
+            "https://tqnvudjlknsmvhdvjrie.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_GolF_xu-ZHfRGfTOuhzdnw_T9AUmyhw";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        // ==================================================
+        // ELEMENTS
+        // ==================================================
+
+        const title =
+            document.getElementById(
+                "title"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        const icon =
+            document.getElementById(
+                "statusIcon"
+            );
+
+
+        const dashboardButton =
+            document.getElementById(
+                "dashboardButton"
+            );
+
+
+        // ==================================================
+        // VERIFY PAYMENT
+        // ==================================================
+
+        async function verifyPayment() {
+
+            try {
+
+                // Make sure the user is still logged in.
+                const {
+                    data: sessionData
+                } =
+                await supabaseClient
+                    .auth
+                    .getSession();
+
+
+                const session =
+                    sessionData?.session;
+
+
+                if (!session) {
+
+                    throw new Error(
+                        "Your login session has expired. Please log in again."
+                    );
+
+                }
+
+
+                // Paystack sends the reference
+                // in the URL.
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+
+                const reference =
+                    params.get(
+                        "reference"
+                    ) ||
+                    params.get(
+                        "trxref"
+                    );
+
+
+                if (!reference) {
+
+                    throw new Error(
+                        "Payment reference was not found."
+                    );
+
+                }
+
+
+                // Call our secure Supabase
+                // Edge Function.
+                const {
+                    data,
+                    error
+                } =
+                await supabaseClient
+                    .functions
+                    .invoke(
+                        "verify-payment",
+                        {
+                            body: {
+                                reference
+                            }
+                        }
+                    );
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                if (
+                    !data ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data?.error ||
+                        data?.message ||
+                        "Payment could not be verified."
+                    );
+
+                }
+
+
+                // =================================================
+                // SUCCESS
+                // =================================================
+
+                icon.textContent =
+                    "✓";
+
+
+                title.textContent =
+                    "Payment Successful";
+
+
+                title.className =
+                    "success";
+
+
+                message.innerHTML =
+                    `
+                    Your payment of
+                    <strong>
+                        ₦${Number(
+                            data.amount || 0
+                        ).toLocaleString(
+                            "en-NG",
+                            {
+                                minimumFractionDigits: 2
+                            }
+                        )}
+                    </strong>
+                    has been confirmed.
+                    <br><br>
+                    Your wallet has been updated.
+                    `;
+
+
+                dashboardButton.style.display =
+                    "inline-block";
+
+
+                // Give Supabase a moment to finish
+                // the database update before returning.
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    },
+                    2500
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Payment verification error:",
+                    error
+                );
+
+
+                icon.textContent =
+                    "✕";
+
+
+                title.textContent =
+                    "Payment Verification Failed";
+
+
+                title.className =
+                    "error";
+
+
+                message.textContent =
+                    error.message ||
+                    "We could not verify this payment.";
+
+
+                dashboardButton.style.display =
+                    "inline-block";
+
+            }
+
+        }
+
+
+        // ==================================================
+        // START
+        // ==================================================
+
+        verifyPayment();
+
+    </script>
+
+</body>
+
+</html>
